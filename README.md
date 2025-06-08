@@ -163,6 +163,7 @@ I believe in infrastructure that is:
 - 💬 **Telegram**: [@d_serg](https://t.me/d_serg)
 - 📧 **Email**: [drobit.github@gmail.com](mailto:drobit.github@gmail.com)
 - 🐙 **GitHub**: [@drobit](https://github.com/drobit)
+- 📦 **UpWork**: [Serhii D.](https://www.upwork.com/freelancers/serhiidrobot)
 
 ---
 
