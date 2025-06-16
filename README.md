@@ -118,18 +118,9 @@ I'm a **DevOps & Kubernetes Engineer** passionate about building **scalable**, *
 
 ![Serhii's GitHub Stats](https://github-readme-stats.vercel.app/api?username=drobit&show_icons=true&theme=tokyonight&hide_border=true&count_private=true)
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=drobit&layout=compact&theme=tokyonight&hide_border=true)
-
 </div>
 
 
-## Contribution Graph
-
-<div align="center">
-
-[![Serhii's github activity graph](https://github-readme-activity-graph.vercel.app/graph?username=drobit&theme=tokyo-night&hide_border=true)](https://github.com/ashutosh00710/github-readme-activity-graph)
-
-</div>
 
 ## Current Focus
 
