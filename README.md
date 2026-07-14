@@ -19,7 +19,7 @@ I run **[Owlzops](https://owlzops.com)** — a DevOps engineering company. We he
 
 ---
 
-## Open Source: owlzops-mapper — a mini-EDR for Linux servers
+## Open Source: owlzops-mapper — a EDR-lite for Linux servers
 
 [![GitHub](https://img.shields.io/badge/OWLZOPS/owlzops--mapper-%23181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/OWLZOPS/owlzops-mapper)
 [![CI](https://github.com/OWLZOPS/owlzops-mapper/actions/workflows/ci.yml/badge.svg)](https://github.com/OWLZOPS/owlzops-mapper/actions/workflows/ci.yml)
