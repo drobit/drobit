@@ -4,7 +4,6 @@
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://linkedin.com/in/serhii-drobot)
 [![Email](https://img.shields.io/badge/Email-hello@owlzops.com-red?style=flat&logo=gmail)](mailto:hello@owlzops.com)
-[![Telegram](https://img.shields.io/badge/Telegram-@d__serg-blue?style=flat&logo=telegram)](https://t.me/d_serg)
 
 ---
 
