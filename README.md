@@ -1,57 +1,58 @@
 # Serhii Drobot
 
-**Founder at [Owlzops](https://owlzops.com) · DevSecOps & Linux Infrastructure Security**
+**Linux infrastructure security · founder of [Owlzops](https://owlzops.com)**
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://linkedin.com/in/serhii-drobot)
 [![Email](https://img.shields.io/badge/Email-hello@owlzops.com-red?style=flat&logo=gmail)](mailto:hello@owlzops.com)
 
----
+I've spent my career in Linux infrastructure — Kubernetes across GKE, EKS, AKS and OpenShift, Terraform and Ansible, Docker in production. Now I do one thing: find what's exposed on other people's servers, then close it.
 
-I run **[Owlzops](https://owlzops.com)** — a boutique DevSecOps practice. We find what's exposed on your Linux infrastructure, and then we close it.
-
-Most of what we find isn't exotic. It's root SSH still permitted, a container running privileged with the Docker socket mounted, a firewall nobody ever switched on. Defaults nobody turned off.
-
-**What we do:**
-
-| | | |
-|---|---|---|
-| **Infrastructure Security Audit** | 3 days · up to 10 hosts | **$2,995** — read-only. What's exposed, and is anyone already inside. Run the free scanner first: if it comes back clean, we'll say so instead of selling you the audit. |
-| **Infrastructure Hardening** | 5–10 days | **from $5,900** — SSH lockdown, default-deny firewall, rootless containers, patch baseline. Staged, reversible, with before/after proof. |
-| **Continuous Hardening** | monthly | **$2,500 / $5,000** — weekly drift scans against your hardened baseline, plus engineering hours. |
-
-Fixed price. Defined scope. No hourly billing.
-
-**[Scan your own server first →](https://owlzops.com/mapper/)** · **[Book an audit](https://owlzops.com/contact?utm_source=github&utm_medium=readme&utm_campaign=profile)**
+Most of what I find isn't exotic. Root SSH still permitted. A container running privileged with the Docker socket mounted. A firewall nobody ever switched on. Defaults nobody turned off.
 
 ---
 
-## owlzops-mapper — an EDR-lite for Linux servers
+## owlzops-mapper
 
 [![GitHub](https://img.shields.io/badge/OWLZOPS/owlzops--mapper-%23181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/OWLZOPS/owlzops-mapper)
 [![CI](https://github.com/OWLZOPS/owlzops-mapper/actions/workflows/ci.yml/badge.svg)](https://github.com/OWLZOPS/owlzops-mapper/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/OWLZOPS/owlzops-mapper?style=flat)](https://github.com/OWLZOPS/owlzops-mapper/releases)
-[![License](https://img.shields.io/badge/license-Apache--2.0%20%2B%20Commons%20Clause-blue?style=flat)](https://github.com/OWLZOPS/owlzops-mapper/blob/main/LICENSE)
 
-A single Rust binary that detects active threats, Docker escapes, and misconfigurations on any Linux server in under a second — no agents, no eBPF, no open ports, nothing left resident.
+One static Rust binary. Sub-second Linux + Docker audit. No agents, no Python, no kernel modules, no open ports, nothing left resident.
 
 ```bash
 sudo ./owlzops-mapper audit
 ```
 
-**Threat detection (IoC):** fileless malware & memfd implants · reverse shells / C2 connections · library injection & LD_PRELOAD rootkits · hidden PIDs (LKM rootkit) · Docker runtime capability tampering · kernel-thread masquerading · bind-mount masking
+It finds reverse shells, fileless implants, library injection, hidden PIDs from LKM rootkits, container escapes, and the usual dangerous defaults — every finding mapped to a CIS reference, with an exit code you can wire into CI (`3` means active compromise).
 
-**Hardening & compliance:** SSH config · firewall · pending security updates · SSL expiry · sysctl hardening · sudo NOPASSWD · backups · NTP drift — every finding mapped to a CIS Benchmark reference
+I wrote it because I was tired of running six tools and still not knowing whether something was already inside. Read-only, `--offline` guarantees zero outbound calls, and the source is public so you can check what runs as root on your box before you run it.
 
-**Deep forensics (`--deep`):** reads process memory via `process_vm_readv` (not `ptrace`), resolves pointers, calculates entropy, flags unattributed executable payloads — and suppresses JIT noise instead of burying you in it
-
-**Output:** terminal dashboard · JSON · Excel · exit codes for CI/CD (0 clean / 1 findings / 2 incomplete / **3 active compromise**)
-
-Read-only. Air-gapped with `--offline`. No data ever leaves the server.
-
-**Licence:** Apache 2.0 with the [Commons Clause](https://commonsclause.com/) — free for your company to use forever, including commercial and internal audits. Not open source in the strict sense: the Commons Clause restricts reselling it as a product, which fails the Open Source Definition. Calling it "source-available" is the accurate term.
-
-**[View the repository →](https://github.com/OWLZOPS/owlzops-mapper)**
+**[→ Repository](https://github.com/OWLZOPS/owlzops-mapper)** · source-available under Apache 2.0 with the Commons Clause — free for your company forever, not for resale.
 
 ---
 
-*If the mapper flags an active compromise or a Docker escape — [that's what Owlzops fixes](https://owlzops.com).*
+## I ran it on my own production first. It scored 60.
+
+Before asking anyone to run a scanner against their production, I ran it against mine — the host that actually serves my company. Root SSH permitted, password auth on, a user with passwordless sudo to every command, FTP listening on `0.0.0.0`. It finished at **23, not 0**, because two findings couldn't be removed without breaking the machine, so they got `auditd` rules watching them instead.
+
+The part I keep coming back to: I stripped `CAP_SYS_ADMIN` and `CAP_SYS_PTRACE` from Apache and `atd` — a web server running as uid 33 could read the memory of every other process on the box. **The score didn't move. 23 before, 23 after.** The rule is binary and other processes still hold capabilities they legitimately need. I did it anyway, because the point is the infrastructure, not the number on the dashboard.
+
+**[→ Full write-up, with the findings I didn't close and why](https://owlzops.com/#proof)**
+
+---
+
+## Owlzops
+
+Boutique DevSecOps practice. Fixed price, defined scope, no hourly billing. The person who scopes the work is the one who does it — that's me.
+
+- **Infrastructure Security Audit** — read-only. What's exposed, and whether anyone is already inside.
+- **Infrastructure Hardening** — SSH lockdown, default-deny firewall, rootless containers, patch baseline. Staged, reversible, with a before/after diff.
+- **Continuous Hardening** — weekly drift scans against your hardened baseline, plus engineering hours.
+
+**Run the scanner first.** If it comes back clean, I'll say so instead of selling you the audit.
+
+**[→ Scan your own server](https://owlzops.com/mapper/?utm_source=github&utm_medium=profile&utm_campaign=profile)** · **[Pricing and scope](https://owlzops.com/?utm_source=github&utm_medium=profile&utm_campaign=profile#services)** · **[Field notes](https://owlzops.com/guides/?utm_source=github&utm_medium=profile&utm_campaign=profile)**
+
+---
+
+*Engagements start on Mondays · current lead time about a week · I take a limited number at a time.*
