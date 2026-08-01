@@ -37,7 +37,7 @@ Before asking anyone to run a scanner against their production, I ran it against
 
 The part I keep coming back to: I stripped `CAP_SYS_ADMIN` and `CAP_SYS_PTRACE` from Apache and `atd` — a web server running as uid 33 could read the memory of every other process on the box. **The score didn't move. 23 before, 23 after.** The rule is binary and other processes still hold capabilities they legitimately need. I did it anyway, because the point is the infrastructure, not the number on the dashboard.
 
-**[→ Full write-up, with the findings I didn't close and why](https://owlzops.com/#proof)**
+**[→ Full write-up, with the findings I didn't close and why](https://owlzops.com/#case-study)**
 
 ---
 
